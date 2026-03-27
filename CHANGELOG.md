@@ -1,3 +1,10 @@
+# [9.0.0](https://github.com/nfroidure/svg-pathdata/compare/v8.0.0...v9.0.0) (2026-03-27)
+
+
+### Bug Fixes
+
+* **test:** fix ci tests ([6d4c1d7](https://github.com/nfroidure/svg-pathdata/commit/6d4c1d7117839519eddfb451df53b68699fa2641))
+
 # [8.0.0](https://github.com/nfroidure/svg-pathdata/compare/v7.2.0...v8.0.0) (2025-06-16)
 
 
