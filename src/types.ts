@@ -1,43 +1,45 @@
 import { SVGPathData } from './SVGPathData.js';
 
-export type CommandM = {
+export interface CommandM {
   relative: boolean;
   type: typeof SVGPathData.MOVE_TO;
   x: number;
   y: number;
-};
-export type CommandL = {
+}
+export interface CommandL {
   relative: boolean;
   type: typeof SVGPathData.LINE_TO;
   x: number;
   y: number;
-};
-export type CommandH = {
+}
+export interface CommandH {
   relative: boolean;
   type: typeof SVGPathData.HORIZ_LINE_TO;
   x: number;
-};
-export type CommandV = {
+}
+export interface CommandV {
   relative: boolean;
   type: typeof SVGPathData.VERT_LINE_TO;
   y: number;
-};
-export type CommandZ = { type: typeof SVGPathData.CLOSE_PATH };
-export type CommandQ = {
+}
+export interface CommandZ {
+  type: typeof SVGPathData.CLOSE_PATH;
+}
+export interface CommandQ {
   relative: boolean;
   type: typeof SVGPathData.QUAD_TO;
   x1: number;
   y1: number;
   x: number;
   y: number;
-};
-export type CommandT = {
+}
+export interface CommandT {
   relative: boolean;
   type: typeof SVGPathData.SMOOTH_QUAD_TO;
   x: number;
   y: number;
-};
-export type CommandC = {
+}
+export interface CommandC {
   relative: boolean;
   type: typeof SVGPathData.CURVE_TO;
   x1: number;
@@ -46,16 +48,16 @@ export type CommandC = {
   y2: number;
   x: number;
   y: number;
-};
-export type CommandS = {
+}
+export interface CommandS {
   relative: boolean;
   type: typeof SVGPathData.SMOOTH_CURVE_TO;
   x2: number;
   y2: number;
   x: number;
   y: number;
-};
-export type CommandA = {
+}
+export interface CommandA {
   relative: boolean;
   type: typeof SVGPathData.ARC;
   rX: number;
@@ -69,7 +71,7 @@ export type CommandA = {
   cY?: number;
   phi1?: number;
   phi2?: number;
-};
+}
 export type SVGCommand =
   | CommandM
   | CommandL

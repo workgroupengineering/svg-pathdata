@@ -1,6 +1,6 @@
 import { describe, test, expect } from '@jest/globals';
 import { SVGPathData } from '../index.js';
-import { type CommandA } from '../types.js';
+import { CommandM, SVGCommand, type CommandA } from '../types.js';
 
 describe('Parsing elliptical arc commands', () => {
   test('should not work when badly declared', () => {
@@ -200,20 +200,29 @@ describe('Encoding eliptical arc commands', () => {
 });
 
 describe('Transforming elliptical arc commands', () => {
-  function assertDeepCloseTo(x, y, delta) {
+  function assertDeepCloseTo(
+    x: number | SVGCommand | SVGCommand[],
+    y: number | SVGCommand | SVGCommand[],
+    delta: number,
+  ) {
     if (typeof x === 'number' && typeof y === 'number') {
       expect(x).toBeCloseTo(y, delta);
-    } else if (typeof x === 'object' && typeof y === 'object') {
-      const keys = Object.getOwnPropertyNames(x);
-
-      expect(keys).toEqual(Object.getOwnPropertyNames(y));
-      for (let i = 0; i < keys.length; i++) {
-        assertDeepCloseTo(x[keys[i]], y[keys[i]], delta);
-      }
     } else if (x instanceof Array && y instanceof Array) {
       expect(x.length).toEqual(y.length);
       for (let i = 0; i < x.length; i++) {
         assertDeepCloseTo(x[i], y[i], delta);
+      }
+    } else if (typeof x === 'object' && typeof y === 'object') {
+      const keys = Object.getOwnPropertyNames(x);
+
+      expect(keys).toEqual(Object.getOwnPropertyNames(y));
+
+      for (const key of keys) {
+        assertDeepCloseTo(
+          (x as CommandM)[key as 'x'],
+          (y as CommandM)[key as 'x'],
+          delta,
+        );
       }
     } else {
       expect(x).toEqual(y);

@@ -36,7 +36,6 @@ const PI = Math.PI;
 export function annotateArcCommand(c: CommandA, x1: number, y1: number) {
   c.lArcFlag = 0 === c.lArcFlag ? 0 : 1;
   c.sweepFlag = 0 === c.sweepFlag ? 0 : 1;
-  // tslint:disable-next-line
   let { rX, rY } = c;
   const { x, y } = c;
 
@@ -218,8 +217,8 @@ export function a2c(arc: CommandA, x0: number, y0: number): CommandC[] {
     ];
   }
 
-  const phiMin = Math.min(arc.phi1!, arc.phi2!),
-    phiMax = Math.max(arc.phi1!, arc.phi2!),
+  const phiMin = Math.min(arc.phi1 as number, arc.phi2 as number),
+    phiMax = Math.max(arc.phi1 as number, arc.phi2 as number),
     deltaPhi = phiMax - phiMin;
   const partCount = Math.ceil(deltaPhi / 90);
 
@@ -229,12 +228,20 @@ export function a2c(arc: CommandA, x0: number, y0: number): CommandC[] {
 
   const transform = (x: number, y: number): Point => {
     const [xTemp, yTemp] = rotate([x * arc.rX, y * arc.rY], xRotRad);
-    return [arc.cX! + xTemp, arc.cY! + yTemp];
+    return [(arc.cX as number) + xTemp, (arc.cY as number) + yTemp];
   };
 
   for (let i = 0; i < partCount; i++) {
-    const phiStart = lerp(arc.phi1!, arc.phi2!, i / partCount);
-    const phiEnd = lerp(arc.phi1!, arc.phi2!, (i + 1) / partCount);
+    const phiStart = lerp(
+      arc.phi1 as number,
+      arc.phi2 as number,
+      i / partCount,
+    );
+    const phiEnd = lerp(
+      arc.phi1 as number,
+      arc.phi2 as number,
+      (i + 1) / partCount,
+    );
     const deltaPhi = phiEnd - phiStart;
     const f = (4 / 3) * Math.tan((deltaPhi * DEG) / 4);
     // x1/y1, x2/y2 and x/y coordinates on the unit circle for phiStart/phiEnd

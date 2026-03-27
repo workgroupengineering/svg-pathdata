@@ -10,7 +10,7 @@ const isDigit = (c: string) =>
   '0'.charCodeAt(0) <= c.charCodeAt(0) && c.charCodeAt(0) <= '9'.charCodeAt(0);
 
 export class SVGPathDataParser extends TransformableSVG {
-  private curNumber: string = '';
+  private curNumber = '';
   private curCommandType: SVGCommand['type'] | -1 = -1;
   private curCommandRelative = false;
   private canParseCommandOrComma = true;
@@ -18,10 +18,6 @@ export class SVGPathDataParser extends TransformableSVG {
   private curNumberHasExpDigits = false;
   private curNumberHasDecimal = false;
   private curArgs: number[] = [];
-
-  constructor() {
-    super();
-  }
 
   finish(commands: SVGCommand[] = []) {
     this.parse(' ', commands);

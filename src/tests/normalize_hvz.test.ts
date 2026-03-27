@@ -1,7 +1,7 @@
 import { describe, test, expect } from '@jest/globals';
 import { SVGPathData } from '../index.js';
 
-function testNormalizeHVZ(input, expected) {
+function testNormalizeHVZ(input: string, expected: string) {
   expect(new SVGPathData(input).normalizeHVZ().encode()).toEqual(
     new SVGPathData(expected).encode(),
   );
